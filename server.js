@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 app.route('/api')
   .get(async (req, res) => {
     console.log('GET request detected');
-    const data = await fetch('https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json'); // This should probably get changed //
+    const data = await fetch('https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json'); 
     const json = await data.json();
     console.log('data from fetch', json);
     res.json(json);
