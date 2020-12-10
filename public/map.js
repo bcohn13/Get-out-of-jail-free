@@ -17,7 +17,7 @@ let crimeData=[];
       attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
   }).addTo(map);
 
-var marker = L.marker(crimeData).addTo(map);
+var marker = L.marker().addTo(map); /* idk what goes indide the L.marker parenthesis */
 
 
 
