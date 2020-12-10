@@ -11,17 +11,38 @@ let crimeData=[];
   console.log(crimeData)
 
 
-  var map = L.map('map').setView([38.906334,-76.88217], 13)
+  var map = L.map("map", {preferCanvas: true}).setView([38.906334,-76.88217], 13);
 
   L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=PpwcNdpieCv3NVxinKED',{
       attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
   }).addTo(map);
 
-var marker = L.marker(crimeData).addTo(map);
+  const icon = L.icon({
+    iconSize: [20, 35],
+    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
+  });
 
 
-
-
+  Promise.all([
+    fetch(
+      "https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json"
+    )
+  ]).then(async ([response]) => {
+    const responseData = await response.json();
+    const data1 = responseData;
+  
+    const layerGroup = L.featureGroup().addTo(map);
+  
+    data1.forEach(({latitude, longitude}) => {
+      layerGroup.addLayer(
+        L.marker([latitude, longitude], {icon}).bindPopup(
+  
+        )
+      );
+    });
+  
+    map.fitBounds(layerGroup.getBounds());
+  });
 
 /*
   var mymap = L.map('mapid').setView([51.505, -0.09], 13);
