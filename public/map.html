@@ -4,25 +4,41 @@
     <!--Code was inspired by code from this link https://jsfiddle.net/api/post/library/pure/-->
     <meta charset="utf-8"/>
     <title>Map Page</title>
-    <script src="map.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=init&libraries=&v=weekly"
-      defer
-    ></script>
 
+    
+    <!--<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ihhvA3e8LNcb2rNW0O65Af3WHx7g-Ng&callback=init&libraries=&v=weekly"
+      defer
+    ></script>-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    
+
+    <script src="map.js"></script>
     <style>
-#map {
+.mapContainer {
   height: 100%;
+}
+#map {
+  height: 180px;
 }
 html,
 body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+ 
 }
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div class="mapContainer">
+    <div id="map">
+
+     
+    </div>
+  </div>
   </body>
 </html>
