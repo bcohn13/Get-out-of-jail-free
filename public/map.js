@@ -25,7 +25,7 @@ let crimeData=[];
 
   Promise.all([
     fetch(
-      "https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json"
+      "https://data.montgomerycountymd.gov/resource/icn6-v9z3.json"
     )
   ]).then(async ([response]) => {
     const responseData = await response.json();
