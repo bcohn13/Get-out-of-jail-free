@@ -21,6 +21,17 @@ app.use((req, res, next) => {
 });
 
 app.route('/api')
+ 
+// my wild guess at a PUT request //
+.put(async (req, res) => {
+  console.log('Put request detected');
+  const data = await fetch('https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json'); 
+  const json = await data.json();
+  console.log('data from fetch', json);
+  res.json(json);
+})
+// has to be double checked ^^ //
+
   .get(async (req, res) => {
     console.log('GET request detected');
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json'); 
@@ -30,7 +41,6 @@ app.route('/api')
   })
   
   .post(async(req, res) => {
-
     console.log('POST request detected');
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json');
     const json = await data.json();
