@@ -28,16 +28,21 @@
         const regex = new RegExp('Theft');
         if (data1[i].crimename1.match(regex) || data1[i].crimename2.match(regex) || data1[i].crimename3.match(regex))  {
         console.log(data1[i])
+        layerGroup.addLayer(
+            L.marker([data1[i].latitude, data1[i].longitude], {icon}).bindPopup(
+      
+            )
+          );
     }}
 
       
-    data1.forEach(({latitude, longitude}) => {
+    /*data1.forEach(({latitude, longitude}) => {
       layerGroup.addLayer(
         L.marker([latitude, longitude], {icon}).bindPopup(
   
         )
       );
-    });
+    });*/
   
     map.fitBounds(layerGroup.getBounds());
   });
