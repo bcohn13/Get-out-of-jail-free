@@ -1,17 +1,18 @@
 let crimeData=[];
 
 
-  fetch('/api', {
+  /*fetch('/api', {
     method: 'POST', 
     headers: {
     'Content-Type': 'application/json' 
   },
   }).then(blob => blob.json())
-  .then(data => crimeData.push(data));
+  .then(data => crimeData.push(...data));
   console.log(crimeData)
+  */
 
 
-  var map = L.map("map", {preferCanvas: true}).setView([38.906334,-76.88217], 13);
+  var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 13);
 
   L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=PpwcNdpieCv3NVxinKED',{
       attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
@@ -30,9 +31,14 @@ let crimeData=[];
   ]).then(async ([response]) => {
     const responseData = await response.json();
     const data1 = responseData;
-  
+  /*  data1.forEach((zip_code)=> {
+
+      crimeData.push(zip_code)
+    })*/
     const layerGroup = L.featureGroup().addTo(map);
-  
+    data1.forEach((item) => {
+      console.log(item.zip_code)
+    })
     data1.forEach(({latitude, longitude}) => {
       layerGroup.addLayer(
         L.marker([latitude, longitude], {icon}).bindPopup(
