@@ -1,26 +1,3 @@
-let crimeData=[];
-
-
-
-  fetch('/api', {
-    method: 'POST', 
-    headers: {
-    'Content-Type': 'application/json' 
-  },
-  }).then(blob => blob.json())
-  .then(data => crimeData.push(...data));
-
-  function findMatches(wordToMatch, arr1) {  
-    return arr1.filter((crime) => {
-        const regex = new RegExp(wordToMatch, 'Theft');
-        return crime.crimename1.match(regex) || crime.crimename2.match(regex) || crime.crimename3.match(regex); /*|| restaurant.city.match(regex) || restaurant.state.match(regex)*/ 
-
-    });
-}
-
-
-  
-
 
   var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 13);
 
@@ -35,26 +12,23 @@ let crimeData=[];
 
 
   Promise.all([
-    fetch(
-      "https://data.montgomerycountymd.gov/resource/icn6-v9z3.json"
-    )
-  ]).then(async ([response]) => {
+    fetch('/api', {
+      method: 'POST', 
+      headers: {
+      'Content-Type': 'application/json' 
+    },
+    })]).then(async ([response]) => {
     const responseData = await response.json();
     const data1 = responseData;
-    data1.forEach((zip_code)=> {
-
-      console.log(zip_code)
-    })
+   
     const layerGroup = L.featureGroup().addTo(map);
 
     
-    /*data1.forEach((item) => {
-      let crimeData=[]
-      if (item.crimename1==="Theft") {
-        crimeData.push(item)
-      }
-      
-    })*/
+    for (let i=0;i<data1.length;i++) {
+        if (data1[i].crimename1==="Theft From Motor Vehicle" || data1[i].crimename2==="Theft From Motor Vehicle" || data1[i].crimename3==="Theft From Motor Vehicle")  {
+        console.log(data1[i])
+    }
+else {console.log("Nope")}}
       
     data1.forEach(({latitude, longitude}) => {
       layerGroup.addLayer(
