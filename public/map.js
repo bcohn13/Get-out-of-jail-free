@@ -41,9 +41,7 @@ let crimeData=[];
     })
     data1.forEach(({latitude, longitude}) => {
       layerGroup.addLayer(
-        L.marker([latitude, longitude], {icon}).bindPopup(
-  
-        )
+        L.marker([latitude, longitude], {icon})
       );
     });
   
