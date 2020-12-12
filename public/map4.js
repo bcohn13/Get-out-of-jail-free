@@ -40,14 +40,8 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
 }
 
     for (const key in zipCodes) {
-    
-   
-        
-        
             layerGroup.addLayer(
-            
             L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
-      
             )
           );
         }
