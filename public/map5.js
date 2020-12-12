@@ -40,7 +40,9 @@ Promise.all([
   const responseData = await response.json();
   const data1 = responseData;
   const layerGroup = L.featureGroup().addTo(map);
-
+/* Zip codes were originally found on this link here https://gist.github.com/erichurst/7882666.
+The ones specifically in Montgomery County were filtered out using python programming and this website
+https://www.zillow.com/browse/homes/md/montgomery-county/ */
   const zipCodes = {
     20812: { lat: 38.967040999999995, lng: -77.14388100000001, crimeCount: 0 },
     20814: { lat: 39.004989, lng: -77.10149, crimeCount: 0 },
@@ -106,7 +108,7 @@ Promise.all([
     }}*/
 
   /*This for loop plots the points on the map*/
-
+/*We learned how to use this style of for loop from the link here https://attacomsian.com/blog/javascript-iterate-objects*/
   for (const zip in zipCodes) {
     totalCrime = totalCrime + zipCodes[zip]["crimeCount"];
   }
