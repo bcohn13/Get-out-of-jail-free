@@ -42,7 +42,7 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
         
         
 
-        if (data1[i]["crimename22"]==="Robbery") {
+        if (data1[i]["crimename2"]==="Robbery") {
             zipCodes[data1[i]["zip_code"]]["crimeCount"]+=1
         
     }}
@@ -64,14 +64,15 @@ for (const zip in zipCodes) {
 console.log(totalCrime)
 
     for (const key in zipCodes) {
-      if (zipCodes[key].crimeCount>=totalCrime/2) {
+        console.log(zipCodes[key]["crimeCount"])
+      if (zipCodes[key]["crimeCount"]>=totalCrime/2) {
         L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: green}).addTo(map).bindPopup("I am a green leaf.");
           
         }
-      if (zipCodes[key].crimeCount<totalCrime/2 && zipCodes[key].crimeCount>=(totalCrime/2)/2) {
+      if (zipCodes[key]["crimeCount"]<totalCrime/2 && zipCodes[key]["crimeCount"]>=(totalCrime/2)/2) {
         L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: yellow}).addTo(map).bindPopup("I am a green leaf.");
       }
-      if (zipCodes[key].crimeCount<totalCrime/2 && zipCodes[key].crimeCount<(totalCrime/2)/2){
+      if (zipCodes[key]["crimeCount"]<totalCrime/2 && zipCodes[key]["crimeCount"]<(totalCrime/2)/2){
         L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: red}).addTo(map).bindPopup("I am a green leaf.");
       }
         
