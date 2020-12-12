@@ -4,13 +4,23 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
       attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
   }).addTo(map);
 
-  const green="images/greenicon.png";
+ /* const green="images/greenicon.png";
   const yellow="images/yellowicon.png";
-  const red="images/Redsquare.png";
+  const red="images/Redsquare.png";*/
  let icon="";
-  
- 
+ const Icon = L.Icon.extend({
+    options: {
+        
+        iconSize:     [38, 95],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+ }});
 
+ var green = new Icon({iconUrl: "images/greenicon.png"}),
+    yellow = new Icon({iconUrl: "images/yellowicon.png"}),
+    red = new Icon({iconUrl: "images/Redsquare.png"});
 
 
   Promise.all([
@@ -29,11 +39,10 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
     
     /*This for loop counts the number of crimes for each zip code and stores them*/
     for (let i=0;i<data1.length;i++) {
-        const regex = new RegExp('Theft');
         
         
 
-        if (data1[i]["crimename1"]==="Crime Against Property") {
+        if (data1[i]["crimename22"]==="Robbery") {
             zipCodes[data1[i]["zip_code"]]["crimeCount"]+=1
         
     }}
@@ -53,60 +62,19 @@ for (const zip in zipCodes) {
 }
 
 console.log(totalCrime)
+
     for (const key in zipCodes) {
       if (zipCodes[key].crimeCount>=totalCrime/2) {
-        icon = L.icon({
-            iconSize: [20, 35],
-            iconUrl: green,
-          });
-        
-          layerGroup.addLayer(
-           
-            
-                
-            L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
-      
-            )
-          )
+        L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: green}).addTo(map).bindPopup("I am a green leaf.");
+          
         }
-      else if (zipCodes[key].crimeCount<totalCrime/2 && zipCodes[key].crimeCount>(totalCrime/2)/2) {
-        icon = L.icon({
-          iconSize: [20, 35],
-          iconUrl: yellow,
-        });
-
-        layerGroup.addLayer(
-           
-            
-                
-          L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
-    
-          )
-        )
+      if (zipCodes[key].crimeCount<totalCrime/2 && zipCodes[key].crimeCount>=(totalCrime/2)/2) {
+        L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: yellow}).addTo(map).bindPopup("I am a green leaf.");
       }
-      else {
-        icon = L.icon({
-          iconSize: [20, 35],
-          iconUrl: red,
-        });
-        layerGroup.addLayer(
-           
-            
-                
-          L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
-    
-          )
-        )
+      if (zipCodes[key].crimeCount<totalCrime/2 && zipCodes[key].crimeCount<(totalCrime/2)/2){
+        L.marker([zipCodes[key].lat, zipCodes[key].lng], {icon: red}).addTo(map).bindPopup("I am a green leaf.");
       }
         
-            layerGroup.addLayer(
-           
-            
-                
-            L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
-      
-            )
-          );
         }
 
     
