@@ -28,7 +28,7 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
         if (data1[i].crimename1.match(regex) || data1[i].crimename2.match(regex) || data1[i].crimename3.match(regex))  {
         console.log(data1[i])
         layerGroup.addLayer(
-            L.marker([data1[i].latitude, data1[i].longitude], {icon}).bindPopup(
+            L.marker([zipCodes[data1[i].zip_code].lat,zipCodes[data1[i].zip_code].lng], {icon}).bindPopup(
       
             )
           );
