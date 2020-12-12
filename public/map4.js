@@ -24,32 +24,37 @@ var map = L.map("map", {preferCanvas: true}).setView([39.1433333,-77.2016667], 1
     let count=0;
     for (let i=0;i<data1.length;i++) {
         count+=1;
-        console.log(count)
+        /*console.log(count)*/
     }
-
-    for (let i=0;i<data1.length;i++) {
+    for (const crime in data1) {
         const regex = new RegExp('Theft');
         
-        /*for (let i=0;i<Object.keys(zipCodes).length;i++) {
-            console.log(Object.keys(zipCodes)[i])
-        }*/
-        if (data1[i].crimename1.match(regex) || data1[i].crimename2.match(regex) || data1[i].crimename3.match(regex))  {
-        console.log(data1[i])
-        layerGroup.addLayer(
-            L.marker([zipCodes[data1[i].zip_code].lat,zipCodes[data1[i].zip_code].lng], {icon}).bindPopup(
+        
+        if (data1[crime].crimename1.match(regex) || data1[crime].crimename2.match(regex) || data1[crime].crimename3.match(regex))  {
+        console.log(data1[crime])
+        
+    }
+    else if (data1[crime]===undefined){
+        continue;
+    }
+}
+
+    for (const key in zipCodes) {
+    
+   
+        
+        
+            layerGroup.addLayer(
+            
+            L.marker([zipCodes[key].lat,zipCodes[key].lng], {icon}).bindPopup(
       
             )
           );
-    }}
+        }
+
+    
 
       
-    /*data1.forEach(({latitude, longitude}) => {
-      layerGroup.addLayer(
-        L.marker([latitude, longitude], {icon}).bindPopup(
-  
-        )
-      );
-    });*/
   
     map.fitBounds(layerGroup.getBounds());
   });
