@@ -25,7 +25,7 @@ We used python and [Zillow](https://www.zillow.com/browse/homes/md/montgomery-co
 ## Technical system decision rationale
 ## Final System
 ## Challenges & Impact
-
+For our app to work, we needed access to zip codes which the dataset we were originally going to work with didn't provide. We had to look for another dataset and stumbled upon the crime data for Montgomery County. This dataset allowed us to implement our dataset smoothly. 
 ## Future Work
 Some next steps would be to add additional functionality to the map such as user input and display various statistics to the user. This app may even be able to expand to show more counties in Maryland. 
 Another future direction would be to transform the current map into a heatmap, which would be more visually appealing to the users. 
