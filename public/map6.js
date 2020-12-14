@@ -11,23 +11,6 @@ L.tileLayer(
   }
 ).addTo(map);
 
-/* const green="images/greenicon.png";
-  const yellow="images/yellowicon.png";
-  const red="images/Redsquare.png";*/
-
-const Icon = L.Icon.extend({
-  options: {
-    iconSize: [38, 95],
-    shadowSize: [50, 64],
-    iconAnchor: [22, 94],
-    shadowAnchor: [4, 62],
-    popupAnchor: [-3, -76],
-  },
-});
-
-const green = new Icon({ iconUrl: "images/greenicon.png" }),
-  yellow = new Icon({ iconUrl: "images/yellowicon.png" }),
-  red = new Icon({ iconUrl: "images/Redsquare.png" });
 
 Promise.all([
   fetch("/api", {
@@ -38,7 +21,7 @@ Promise.all([
   }),
 ]).then(async ([response]) => {
   const responseData = await response.json();
-  const data1 = responseData;
+  const data = responseData;
   const layerGroup = L.featureGroup().addTo(map);
 /* Zip codes were originally found on this link here https://gist.github.com/erichurst/7882666.
 The ones specifically in Montgomery County were filtered out using python programming and this website
@@ -93,9 +76,9 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
   let totalCrime = 0;
 
   /*This for loop counts the number of crimes for each zip code and stores them*/
-  for (let i = 0; i < data1.length; i++) {
-    if (data1[i]["crimename1"] === "Theft From Motor Vehicle" || data1[i]["crimename2"] === "Theft From Motor Vehicle" || data1[i]["crimename3"] === "Theft From Motor Vehicle") {
-      zipCodes[data1[i]["zip_code"]]["crimeCount"] += 1;
+  for (let i = 0; i < data.length; i++) {
+    if (data[i]["crimename1"] === "Theft From Motor Vehicle" || data[i]["crimename2"] === "Theft From Motor Vehicle" || data["crimename3"] === "Theft From Motor Vehicle") {
+      zipCodes[data[i]["zip_code"]]["crimeCount"] += 1;
     }
   }
 
@@ -107,28 +90,37 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
 
   console.log(totalCrime);
 
-  for (const key in zipCodes) {
-    console.log(zipCodes[key]["crimeCount"]);
-    if (zipCodes[key]["crimeCount"] >= totalCrime / 2) {
-      L.marker([zipCodes[key].lat, zipCodes[key].lng], { icon: green })
+  for (const zip in zipCodes) {
+    console.log(zipCodes[zip]["crimeCount"]);
+    if (zipCodes[zip]["crimeCount"] >= totalCrime / 2) {
+      L.circle([zipCodes[zip].lat, zipCodes[zip].lng], {color: 'green',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[key]["crimeCount"]+". High chance of successful crime.");
+        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". High chance of successful crime.");
     }
     else if (
-      zipCodes[key]["crimeCount"] < totalCrime / 2 &&
-      zipCodes[key]["crimeCount"] >= totalCrime / 2 / 2
+      zipCodes[zip]["crimeCount"] < totalCrime / 2 &&
+      zipCodes[zip]["crimeCount"] >= totalCrime / 2 / 2
     ) {
-      L.marker([zipCodes[key].lat, zipCodes[key].lng], { icon: yellow })
+      L.circle([zipCodes[zip].lat, zipCodes[zip].lng], {color: 'yellow',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[key]["crimeCount"]+". Moderate risk of getting caught.");
+        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". Moderate risk of getting caught.");
     }
     else if (
-      zipCodes[key]["crimeCount"] < totalCrime / 2 &&
-      zipCodes[key]["crimeCount"] < totalCrime / 2 / 2
+      zipCodes[zip]["crimeCount"] < totalCrime / 2 &&
+      zipCodes[zip]["crimeCount"] < totalCrime / 2 / 2
     ) {
-      L.marker([zipCodes[key].lat, zipCodes[key].lng], { icon: red })
+      L.circle([zipCodes[zip].lat, zipCodes[zip].lng], { color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[key]["crimeCount"]+". High risk of getting caught.");
+        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". High risk of getting caught.");
     }
   }
 
