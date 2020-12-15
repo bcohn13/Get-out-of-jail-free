@@ -10,9 +10,15 @@ Our app is a one-stop shop for criminals to find the best places to commit robbe
 
 
 # [Developer Manual]() 
-Your Developer Manual covers:
-How to install your application and all dependencies
-How to run your application on a server
-How to run any tests you have written for your software
+
+How to install application and all dependencies:
+    Clone the repository and install npm and fetch via the terminal.
+
+How to run your application on a server:
+    Type 'npm start' in the terminal and visit 'localhost:3000' in the browser.
+
 The API for your server application - all GET, POST, PUT, etc endpoints, and what they each do
+    The API for our server comes from the Montgomery County public database. Using a GET request to retrieve the data from the API, POST to send the data, and PUT to update the resource.
+
 A clear set of expectations around known bugs and a road-map for future development.
+    In the future, we want to read more entries from the dataset in order to have a more accurate representation of the risk of crimes on the map. We also want to add a search feature on the map page that will allow users to input the types of crimes to display.
