@@ -25,7 +25,7 @@ Promise.all([
   const responseData = await response.json();
   const data = responseData;
   const layerGroup = L.featureGroup().addTo(map);
-  
+
 /* Zip codes were originally found on this link here https://gist.github.com/erichurst/7882666.
 The ones specifically in Montgomery County were filtered out using python programming and this website
 https://www.zillow.com/browse/homes/md/montgomery-county/ */
@@ -105,7 +105,7 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
       fillOpacity: 0.5,
       radius: 2500})
         .addTo(map)
-        .bindPopup("Zip Code: "+zip+"\ Crime count: "+zipCodes[zip]["crimeCount"]+".\ High chance of successful crime.");
+        .bindPopup("Zip Code: "+zip+", Crime count: "+zipCodes[zip]["crimeCount"]+", High chance of successful crime.");
     }
     else if (
       zipCodes[zip]["crimeCount"] < totalCrime / 2 &&
@@ -127,7 +127,7 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
       fillOpacity: 0.5,
       radius: 2500})
         .addTo(map)
-        .bindPopup("Zip Code: "+zip+"\ Crime count: "+zipCodes[zip]["crimeCount"]+"\ High risk of getting caught.");
+        .bindPopup("Zip Code: "+zip+", Crime count: "+zipCodes[zip]["crimeCount"]+", High risk of getting caught.");
     }
   }
 });
