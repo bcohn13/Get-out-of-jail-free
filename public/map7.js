@@ -1,6 +1,7 @@
+
 let map = L.map("map", { preferCanvas: true }).setView(
-  [39.1433333, -77.2016667],
-  13
+  [39.072608, -77.124386],
+ 10
 );
 
 L.tileLayer(
@@ -74,7 +75,7 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
     20912: { lat: 38.981606, lng: -77.001161, crimeCount: 0 },
   };
   let totalCrime = 0;
-
+  
   /*This for loop counts the number of crimes for each zip code and stores them*/
   for (let i = 0; i < data.length; i++) {
     if (data[i]["crimename1"] === "Theft From Motor Vehicle" || data[i]["crimename2"] === "Theft From Motor Vehicle" || data["crimename3"] === "Theft From Motor Vehicle") {
@@ -98,7 +99,7 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
       fillOpacity: 0.5,
       radius: 2500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". High chance of successful crime.");
+        .bindPopup("Zip Code: "+zip+"\ Crime count: "+zipCodes[zip]["crimeCount"]+".\ High chance of successful crime.");
     }
     else if (
       zipCodes[zip]["crimeCount"] < totalCrime / 2 &&
@@ -109,7 +110,7 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
       fillOpacity: 0.5,
       radius: 2500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". Moderate risk of getting caught.");
+        .bindPopup("Zip Code: "+zip+"\ Crime count: "+zipCodes[zip]["crimeCount"]+".\ Moderate risk of getting caught.");
     }
     else if (
       zipCodes[zip]["crimeCount"] < totalCrime / 2 &&
@@ -120,9 +121,9 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
       fillOpacity: 0.5,
       radius: 2500})
         .addTo(map)
-        .bindPopup("Crime count: "+zipCodes[zip]["crimeCount"]+". High risk of getting caught.");
+        .bindPopup("Zip Code: "+zip+"\ Crime count: "+zipCodes[zip]["crimeCount"]+"\ High risk of getting caught.");
     }
   }
 
-  map.fitBounds(layerGroup.getBounds());
+  /*map.fitBounds(layerGroup.getBounds());*/
 });
