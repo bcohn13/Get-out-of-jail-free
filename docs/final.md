@@ -22,7 +22,11 @@ Zip codes were originally found at [Zip Codes](https://gist.github.com/erichurst
 We used python and [Zillow](https://www.zillow.com/browse/homes/md/montgomery-county/) to filter for MoCo zip codes.
 
 ## Strategies & Solutions
+We deciced to present our solution in the form of an interactive map. We thought it provided for the best user experience because it provides all of the information users need to pull of a successful heist. We chose to represent our data using 3 easily identifable colored circles: green, yellow, and red. The circles represent unique zip codes in Montgomery County. We also used clickable pop ups to display crime count in that zip code. 
+
 ## Technical system decision rationale
+
+
 ## Final System
 Our final system is a great resource for criminals to utilize when they are looking to pull off a heist in Montgomery County. It addresses our information problem by displaying an interactive map that shows differing levels of crime. A green icon on the map means that there is a low risk of getting caught. Yellow means there is a medium chance, and red indicates that there is a high risk of getting caught. The icon, when clicked, displays the crime count for that zip code. 
 
