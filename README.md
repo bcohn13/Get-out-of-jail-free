@@ -9,7 +9,7 @@ Our app is a one-stop shop for criminals to find the best places to commit robbe
 *This application can be used on any size laptop, desktop, and mobile device.*
 
 
-# [Developer Manual]() 
+# Developer Manual
 
 How to install application and all dependencies:
     Clone the repository and install npm and fetch via the terminal.
