@@ -1,5 +1,6 @@
 
-let map = L.map("map", { preferCanvas: true }).setView(
+let map = L.map("map", { preferCanvas: true,
+    minZoom: 10 }).setView(
   [39.072608, -77.124386],
  10
 );
@@ -75,12 +76,16 @@ https://www.zillow.com/browse/homes/md/montgomery-county/ */
     20912: { lat: 38.981606, lng: -77.001161, crimeCount: 0 },
   };
   let totalCrime = 0;
+  const crimeCategories=["THEFT","LARCENY","SHOPLIFTING","ROBBERY","BURGLARY"];
   
   /*This for loop counts the number of crimes for each zip code and stores them*/
   for (let i = 0; i < data.length; i++) {
-    if (data[i]["crimename1"] === "Theft From Motor Vehicle" || data[i]["crimename2"] === "Theft From Motor Vehicle" || data["crimename3"] === "Theft From Motor Vehicle") {
+    
+    for (let j = 0; j < crimeCategories.length; j++)
+    if (String(data[i]["crimename1"]).toUpperCase().includes(crimeCategories[j]) || String(data[i]["crimename2"]).toUpperCase().includes(crimeCategories[j]) || String(data[i]["crimename3"]).toUpperCase().includes(crimeCategories[j])) {
       zipCodes[data[i]["zip_code"]]["crimeCount"] += 1;
     }
+  
   }
 
   /*This for loop plots the points on the map*/
